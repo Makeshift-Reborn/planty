@@ -10,8 +10,8 @@
 char ssid[] = SECRET_SSID;
 char pass[] = SECRET_PASS; 
 int wifiStatus = WL_IDLE_STATUS;
-WiFiUDP Udp;
-NTPClient timeClient(Udp);
+WiFiUDP ntpUDP;
+NTPClient timeClient(ntpUDP);
 int sensorPinZero = A0;
 int sensorPinOne = A1;
 int lightSensor = A2;
@@ -125,6 +125,8 @@ void loop() {
   for(int i = 0; i < 2; i++){
     moistValues[i] = returnValueMoist(i);
   }
+  timeClient.update();
+  Serial.println(timeClient.getFormattedTime());
 
   //Serial.print("sensor 0: ");
   //Serial.println(moistValues[0]);
