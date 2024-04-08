@@ -99,7 +99,7 @@ void setup() {
   RTCTime timeSet = RTCTime(epochTime);
   RTC.setTime(timeSet);
   RTCTime currentTime;
-  currentTime = RTC.getTime();
+  RTC.getTime(currentTime);
   Serial.println("The RTC was just set to: " + String(currentTime));
   
 }
