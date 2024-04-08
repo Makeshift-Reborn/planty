@@ -89,9 +89,26 @@ bool lowMoistCheck(void){
 
 void setup() {
   // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  Serial.begin(9600);
+  while (!Serial);
+  connectToWiFi();
+  RTC.begin();
+  timeClient.begin();
+  timeClient.update();
+  auto epochTime = timeClient.getEpochTime();
+  RTCTime timeSet = RTCTime(epochTime);
+  RTC.setTime(timeSet);
+  RTCTime currentTime;
+  currentTime = RTC.getTime();
+  Serial.println("The RTC was just set to: " + String(currentTime));
+  
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+  for(int i = 0; i < 2; i++){
+    moistValues[i] = returnValueMoist(i);
+  }
+  Serial.println(timeClient.getFormattedTime());
+  delay(5000);
 }
