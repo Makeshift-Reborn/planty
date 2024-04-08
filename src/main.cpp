@@ -110,5 +110,14 @@ void loop() {
     moistValues[i] = returnValueMoist(i);
   }
   Serial.println(timeClient.getFormattedTime());
+
+  //Serial.print("sensor 0: ");
+  //Serial.println(moistValues[0]);
+  //Serial.print("sensor 1: ");
+  //Serial.println(moistValues[1]);
+  //Serial.print("Light sensor: ");
+  //Serial.println(returnLightValue());
+  //Serial.println("===============================================================================");
+
   delay(5000);
 }
