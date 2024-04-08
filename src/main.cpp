@@ -17,7 +17,7 @@ int lightSensor = A2;
 int moistValues[2];
 bool happyPlants = true;
 
-int printWifiStatus(){
+void printWifiStatus(){
   // print the SSID of the network you're attached to:
   Serial.print("SSID: ");
   Serial.println(WiFi.SSID());
