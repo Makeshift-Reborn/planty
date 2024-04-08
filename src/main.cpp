@@ -17,11 +17,75 @@ int lightSensor = A2;
 int moistValues[2];
 bool happyPlants = true;
 
+int printWifiStatus(){
+  // print the SSID of the network you're attached to:
+  Serial.print("SSID: ");
+  Serial.println(WiFi.SSID());
+
+  // print your board's IP address:
+  IPAddress ip = WiFi.localIP();
+  Serial.print("IP Address: ");
+  Serial.println(ip);
+}
+
+void connectToWiFi(){
+  // check for the WiFi module:
+  if (WiFi.status() == WL_NO_MODULE) {
+    Serial.println("Communication with WiFi module failed!");
+    // don't continue
+    while (true);
+  }
+
+  String fv = WiFi.firmwareVersion();
+  if (fv < WIFI_FIRMWARE_LATEST_VERSION) {
+    Serial.println("Please upgrade the firmware");
+  }
+
+  // attempt to connect to WiFi network:
+  while (wifiStatus != WL_CONNECTED) {
+    Serial.print("Attempting to connect to SSID: ");
+    Serial.println(ssid);
+    // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
+    wifiStatus = WiFi.begin(ssid, pass);
+
+    // wait 10 seconds for connection:
+    delay(10000);
+  }
+
+  Serial.println("Connected to WiFi");
+  printWifiStatus();
+}
+
+int returnValueMoist(int sensor){
+  switch(sensor){
+    case 0:
+      return analogRead(sensorPinZero);
+      break;
+    case 1:
+      return analogRead(sensorPinOne);
+      break;
+  }
+}
+
+int returnLightValue(void){
+  return analogRead(lightSensor);
+}
+
+bool lowMoistCheck(void){
+  for(int j=0; j < 2; j++){
+    if(moistValues[j] < 30){
+      Serial.print("plantie ");
+      Serial.print(j);
+      Serial.println(" is a sad plantie :(");
+      return false;
+    } else {
+      Serial.print(j);
+      Serial.println(" is a happy plantie!");
+    }
+  }
+}
 
 
-
-// put function declarations here:
-int myFunction(int, int);
 
 void setup() {
   // put your setup code here, to run once:
@@ -30,9 +94,4 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
 }
