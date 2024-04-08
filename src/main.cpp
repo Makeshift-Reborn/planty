@@ -10,7 +10,7 @@ char ssid[] = SECRET_SSID;
 char pass[] = SECRET_PASS;
 int wifiStatus = WL_IDLE_STATUS;
 WiFiUDP ntpUDP;
-NTPClient timeClient(netUDP);
+NTPClient timeClient(ntpUDP);
 int sensorPinZero = A0;
 int sensorPinOne = A1;
 int lightSensor = A2;
