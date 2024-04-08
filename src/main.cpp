@@ -81,6 +81,7 @@ bool lowMoistCheck(void){
     } else {
       Serial.print(j);
       Serial.println(" is a happy plantie!");
+      return true;
     }
   }
 }
