@@ -6,6 +6,19 @@
 #include "RTC.h"
 #include "arduino_secrets.h"
 
+char ssid[] = SECRET_SSID;
+char pass[] = SECRET_PASS;
+int wifiStatus = WL_IDLE_STATUS;
+WiFiUDP ntpUDP;
+NTPClient timeClient(netUDP);
+int sensorPinZero = A0;
+int sensorPinOne = A1;
+int lightSensor = A2;
+int moistValues[2];
+bool happyPlants = true;
+
+
+
 
 // put function declarations here:
 int myFunction(int, int);
