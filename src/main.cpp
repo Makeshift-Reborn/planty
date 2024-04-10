@@ -17,7 +17,7 @@ int lightSensor = A2;
 int moistValues[2];
 bool happyPlants = true;
 
-void printWifiStatus(){
+void printWifiStatus(void){
   // print the SSID of the network you're attached to:
   Serial.print("SSID: ");
   Serial.println(WiFi.SSID());
@@ -28,7 +28,7 @@ void printWifiStatus(){
   Serial.println(ip);
 }
 
-void connectToWiFi(){
+void connectToWiFi(void){
   // check for the WiFi module:
   if (WiFi.status() == WL_NO_MODULE) {
     Serial.println("Communication with WiFi module failed!");
