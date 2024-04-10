@@ -86,6 +86,12 @@ bool lowMoistCheck(void){
   }
 }
 
+void waterPlantie(void){
+  if(!lowMoistCheck()){
+    Serial.println("Watering planties");
+  }
+
+}
 
 
 void setup() {
