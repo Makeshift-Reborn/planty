@@ -6,20 +6,20 @@
 #include "RTC.h"
 #include "arduino_secrets.h"
 
-
-//changing this to a one plant thing for now, I am just commenting out the parts that will have to do with multiple plants
+// changing this to a one plant thing for now, I am just commenting out the parts that will have to do with multiple plants
 char ssid[] = SECRET_SSID;
 char pass[] = SECRET_PASS;
 int wifiStatus = WL_IDLE_STATUS;
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "us.pool.ntp.org", -18000);
 int sensorPinZero = A0;
-//int sensorPinOne = A1;
+// int sensorPinOne = A1;
 int lightSensor = A2;
-//int moistValues[2];
+// int moistValues[2];
 bool happyPlants = true;
 
-void printWifiStatus(void){
+void printWifiStatus(void)
+{
   // print the SSID of the network you're attached to:
   Serial.print("SSID: ");
   Serial.println(WiFi.SSID());
@@ -30,21 +30,26 @@ void printWifiStatus(void){
   Serial.println(ip);
 }
 
-void connectToWiFi(void){
+void connectToWiFi(void)
+{
   // check for the WiFi module:
-  if (WiFi.status() == WL_NO_MODULE) {
+  if (WiFi.status() == WL_NO_MODULE)
+  {
     Serial.println("Communication with WiFi module failed!");
     // don't continue
-    while (true);
+    while (true)
+      ;
   }
 
   String fv = WiFi.firmwareVersion();
-  if (fv < WIFI_FIRMWARE_LATEST_VERSION) {
+  if (fv < WIFI_FIRMWARE_LATEST_VERSION)
+  {
     Serial.println("Please upgrade the firmware");
   }
 
   // attempt to connect to WiFi network:
-  while (wifiStatus != WL_CONNECTED) {
+  while (wifiStatus != WL_CONNECTED)
+  {
     Serial.print("Attempting to connect to SSID: ");
     Serial.println(ssid);
     // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
@@ -58,22 +63,29 @@ void connectToWiFi(void){
   printWifiStatus();
 }
 
-int returnValueMoist(int sensor){
-  switch(sensor){
-    case 0:
-      return analogRead(sensorPinZero);
-      break;
-    case 1:
-      return analogRead(sensorPinOne);
-      break;
-  }
+int returnValueMoist(int sensor)
+{
+  /* switch (sensor)
+  {
+  case 0:
+    return analogRead(sensorPinZero);
+    break;
+  case 1:
+    return analogRead(sensorPinOne);
+    break;
+  } */
+
+
+  return analogRead(sensorPinZero);
 }
 
-int returnLightValue(void){
+int returnLightValue(void)
+{
   return analogRead(lightSensor);
 }
 
-bool lowMoistCheck(void){
+bool lowMoistCheck(void)
+{
   /* for(int j=0; j < 2; j++){
     if(moistValues[j] < 30){
       Serial.print("plantie ");
@@ -86,31 +98,36 @@ bool lowMoistCheck(void){
       return true;
     }
   } */
-  if(sensorPinZero < 30){
+  if (sensorPinZero < 30)
+  {
     Serial.println("Plantie is sad :(");
     return true;
-  } else {
+  }
+  else
+  {
     Serial.println("Plantie is happy!");
     return false;
-  
   }
-
 }
 
-void waterPlantie(void){
-  if(lowMoistCheck()){
+void waterPlantie(void)
+{
+  if (lowMoistCheck())
+  {
     Serial.println("Watering planties");
-  } else {
+  }
+  else
+  {
     Serial.println("Planties are happy, no need to water");
   }
-
 }
 
-
-void setup() {
+void setup()
+{
   // put your setup code here, to run once:
   Serial.begin(9600);
-  while (!Serial);
+  while (!Serial)
+    ;
   connectToWiFi();
   RTC.begin();
   timeClient.begin();
@@ -121,27 +138,23 @@ void setup() {
   RTCTime currentTime;
   RTC.getTime(currentTime);
   Serial.println("The RTC was just set to: " + String(currentTime));
-  
 }
 
-void loop() {
+void loop()
+{
   // put your main code here, to run repeatedly:
-  
-  
-  
-  
-  
+
   /* for(int i = 0; i < 2; i++){
     moistValues[i] = returnValueMoist(i);
   } */
-/*   Serial.print("NTP time: ");
-  Serial.println(timeClient.getFormattedTime());
-  Serial.println("===============================================================================");
-  Serial.print("RTC time: ");
-  RTCTime currentTime;
-  RTC.getTime(currentTime);
-  Serial.println(currentTime);
-  Serial.println("==============================================================================="); */
+  /*   Serial.print("NTP time: ");
+    Serial.println(timeClient.getFormattedTime());
+    Serial.println("===============================================================================");
+    Serial.print("RTC time: ");
+    RTCTime currentTime;
+    RTC.getTime(currentTime);
+    Serial.println(currentTime);
+    Serial.println("==============================================================================="); */
 
   /* Serial.print("sensor 0: ");
   Serial.println(moistValues[0]);
