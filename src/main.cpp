@@ -140,7 +140,12 @@ void waterPlantie(void)
   }
 }
 
-
+void lightOn(void){
+  digitalWrite(relayPin, HIGH);
+}
+void lightOff(void){
+  digitalWrite(relayPin, LOW);
+}
 
 void setup()
 {
@@ -193,6 +198,14 @@ void loop()
   // if it is below 30, it will return true and waterPlantie() will call runPump() to water the plant
   // if it is above 30, it will return false and waterPlantie() will print that the plant is happy and not water it
   // this should run every 5 seconds with a delay of 5000
+  RTCTime currentTime;
+  RTC.getTime(currentTime);
+  int currentHour = currentTime.getHour();
+  if(currentHour >= 6 && currentHour <= 18){
+    lightOn();
+  } else {
+    lightOff();
+  }
 
   delay(5000);
 }
