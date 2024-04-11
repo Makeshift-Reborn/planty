@@ -116,14 +116,14 @@ void loop() {
   for(int i = 0; i < 2; i++){
     moistValues[i] = returnValueMoist(i);
   }
-  Serial.print("NTP time: ");
+/*   Serial.print("NTP time: ");
   Serial.println(timeClient.getFormattedTime());
   Serial.println("===============================================================================");
   Serial.print("RTC time: ");
   RTCTime currentTime;
   RTC.getTime(currentTime);
   Serial.println(currentTime);
-  Serial.println("===============================================================================");
+  Serial.println("==============================================================================="); */
 
 
 
