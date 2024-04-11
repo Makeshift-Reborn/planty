@@ -10,7 +10,7 @@ char ssid[] = SECRET_SSID;
 char pass[] = SECRET_PASS;
 int wifiStatus = WL_IDLE_STATUS;
 WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP);
+NTPClient timeClient(ntpUDP, "us.pool.ntp.org", -18000);
 int sensorPinZero = A0;
 int sensorPinOne = A1;
 int lightSensor = A2;
@@ -116,7 +116,17 @@ void loop() {
   for(int i = 0; i < 2; i++){
     moistValues[i] = returnValueMoist(i);
   }
+  Serial.print("NTP time: ");
   Serial.println(timeClient.getFormattedTime());
+  Serial.println("===============================================================================");
+  Serial.print("RTC time: ");
+  RTCTime currentTime;
+  RTC.getTime(currentTime);
+  Serial.println(currentTime);
+  Serial.println("===============================================================================");
+
+
+
 
   //Serial.print("sensor 0: ");
   //Serial.println(moistValues[0]);
