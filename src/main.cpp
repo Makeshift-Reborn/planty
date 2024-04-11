@@ -75,7 +75,6 @@ int returnValueMoist(void)
     break;
   } */
 
-
   return analogRead(sensorPinZero);
 }
 
