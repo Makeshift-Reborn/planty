@@ -6,15 +6,17 @@
 #include "RTC.h"
 #include "arduino_secrets.h"
 
+
+//changing this to a one plant thing for now, I am just commenting out the parts that will have to do with multiple plants
 char ssid[] = SECRET_SSID;
 char pass[] = SECRET_PASS;
 int wifiStatus = WL_IDLE_STATUS;
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "us.pool.ntp.org", -18000);
 int sensorPinZero = A0;
-int sensorPinOne = A1;
+//int sensorPinOne = A1;
 int lightSensor = A2;
-int moistValues[2];
+//int moistValues[2];
 bool happyPlants = true;
 
 void printWifiStatus(void){
@@ -72,7 +74,7 @@ int returnLightValue(void){
 }
 
 bool lowMoistCheck(void){
-  for(int j=0; j < 2; j++){
+  /* for(int j=0; j < 2; j++){
     if(moistValues[j] < 30){
       Serial.print("plantie ");
       Serial.print(j);
@@ -83,12 +85,23 @@ bool lowMoistCheck(void){
       Serial.println(" is a happy plantie!");
       return true;
     }
+  } */
+  if(sensorPinZero < 30){
+    Serial.println("Plantie is sad :(");
+    return true;
+  } else {
+    Serial.println("Plantie is happy!");
+    return false;
+  
   }
+
 }
 
 void waterPlantie(void){
-  if(!lowMoistCheck()){
+  if(lowMoistCheck()){
     Serial.println("Watering planties");
+  } else {
+    Serial.println("Planties are happy, no need to water");
   }
 
 }
@@ -113,9 +126,9 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  for(int i = 0; i < 2; i++){
+  /* for(int i = 0; i < 2; i++){
     moistValues[i] = returnValueMoist(i);
-  }
+  } */
 
 
 
