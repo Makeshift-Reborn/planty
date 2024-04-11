@@ -127,14 +127,14 @@ void waterPlantie(void)
   }
 }
 
-void runPump(void){
+void runPump(void)
+{
   digitalWrite(directionPin, HIGH);
   digitalWrite(brakePin, LOW);
   analogWrite(pwmPin, 255);
   delay(3000);
   analogWrite(pwmPin, 0);
 }
-
 
 void setup()
 {
@@ -152,7 +152,7 @@ void setup()
   RTCTime currentTime;
   RTC.getTime(currentTime);
   Serial.println("The RTC was just set to: " + String(currentTime));
-  pinMode(directionPin, OUTPUT);  
+  pinMode(directionPin, OUTPUT);
   pinMode(brakePin, OUTPUT);
 }
 
@@ -181,10 +181,10 @@ void loop()
   Serial.println("==============================================================================="); */
 
   waterPlantie();
-  //waterPlantie() will call lowMoistCheck() which will call returnValueMoist() to get the moisture value of the plant and check if it is below a value of 30
-  //if it is below 30, it will return true and waterPlantie() will call runPump() to water the plant
-  //if it is above 30, it will return false and waterPlantie() will print that the plant is happy and not water it
-  //this should run every 5 seconds with a delay of 5000
+  // waterPlantie() will call lowMoistCheck() which will call returnValueMoist() to get the moisture value of the plant and check if it is below a value of 30
+  // if it is below 30, it will return true and waterPlantie() will call runPump() to water the plant
+  // if it is above 30, it will return false and waterPlantie() will print that the plant is happy and not water it
+  // this should run every 5 seconds with a delay of 5000
 
   delay(5000);
 }
