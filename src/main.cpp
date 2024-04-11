@@ -116,6 +116,13 @@ void loop() {
   for(int i = 0; i < 2; i++){
     moistValues[i] = returnValueMoist(i);
   }
+
+
+
+
+
+
+
 /*   Serial.print("NTP time: ");
   Serial.println(timeClient.getFormattedTime());
   Serial.println("===============================================================================");
@@ -125,16 +132,13 @@ void loop() {
   Serial.println(currentTime);
   Serial.println("==============================================================================="); */
 
-
-
-
-  //Serial.print("sensor 0: ");
-  //Serial.println(moistValues[0]);
-  //Serial.print("sensor 1: ");
-  //Serial.println(moistValues[1]);
-  //Serial.print("Light sensor: ");
-  //Serial.println(returnLightValue());
-  //Serial.println("===============================================================================");
+  /* Serial.print("sensor 0: ");
+  Serial.println(moistValues[0]);
+  Serial.print("sensor 1: ");
+  Serial.println(moistValues[1]);
+  Serial.print("Light sensor: ");
+  Serial.println(returnLightValue());
+  Serial.println("==============================================================================="); */
 
   delay(5000);
 }
