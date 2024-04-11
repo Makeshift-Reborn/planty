@@ -63,7 +63,7 @@ void connectToWiFi(void)
   printWifiStatus();
 }
 
-int returnValueMoist(int sensor)
+int returnValueMoist(void)
 {
   /* switch (sensor)
   {
@@ -98,7 +98,8 @@ bool lowMoistCheck(void)
       return true;
     }
   } */
-  if (sensorPinZero < 30)
+  int moistValue = returnValueMoist();
+  if (moistValue < 30)
   {
     Serial.println("Plantie is sad :(");
     return true;
