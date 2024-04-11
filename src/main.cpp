@@ -126,16 +126,14 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
+  
+  
+  
+  
+  
   /* for(int i = 0; i < 2; i++){
     moistValues[i] = returnValueMoist(i);
   } */
-
-
-
-
-
-
-
 /*   Serial.print("NTP time: ");
   Serial.println(timeClient.getFormattedTime());
   Serial.println("===============================================================================");
