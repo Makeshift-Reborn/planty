@@ -21,6 +21,7 @@ int directionPin = 12;
 int pwmPin = 3;
 int brakePin = 9;
 bool directionState;
+int relayPin = 2;
 
 void printWifiStatus(void)
 {
@@ -102,16 +103,28 @@ bool lowMoistCheck(void)
     }
   } */
   int moistValue = returnValueMoist();
+  bool result; // Declare the variable before using it
   if (moistValue < 30)
   {
     Serial.println("Plantie is sad :(");
-    return true;
+    result = true; // Assign a value to the declared variable
+    return result; // Use the declared variable in the return statement
   }
   else
   {
     Serial.println("Plantie is happy!");
-    return false;
+    result = false; // Assign a value to the declared variable
+    return result; // Use the declared variable in the return statement
   }
+}
+
+void runPump(void)
+{
+  digitalWrite(directionPin, HIGH);
+  digitalWrite(brakePin, LOW);
+  analogWrite(pwmPin, 255);
+  delay(3000);
+  analogWrite(pwmPin, 0);
 }
 
 void waterPlantie(void)
@@ -127,14 +140,7 @@ void waterPlantie(void)
   }
 }
 
-void runPump(void)
-{
-  digitalWrite(directionPin, HIGH);
-  digitalWrite(brakePin, LOW);
-  analogWrite(pwmPin, 255);
-  delay(3000);
-  analogWrite(pwmPin, 0);
-}
+
 
 void setup()
 {
@@ -142,6 +148,9 @@ void setup()
   Serial.begin(9600);
   while (!Serial)
     ;
+  pinMode(directionPin, OUTPUT);
+  pinMode(brakePin, OUTPUT);
+  pinMode(relayPin, OUTPUT);
   connectToWiFi();
   RTC.begin();
   timeClient.begin();
@@ -152,8 +161,7 @@ void setup()
   RTCTime currentTime;
   RTC.getTime(currentTime);
   Serial.println("The RTC was just set to: " + String(currentTime));
-  pinMode(directionPin, OUTPUT);
-  pinMode(brakePin, OUTPUT);
+
 }
 
 void loop()
