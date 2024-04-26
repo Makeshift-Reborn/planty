@@ -206,7 +206,6 @@ void loop()
   } else {
     lightOff();
   }
-
-  //test
+  //this is a test!!!!
   delay(5000);
 }
